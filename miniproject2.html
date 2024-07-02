@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            border: 1px solid black;
+            padding: 20px;
+            width: 300px;
+            margin: 50px auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="file"],
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="email"] {
+            width: calc(100% - 12px);
+            padding: 5px;
+            margin-right: 5px;
+            box-sizing: border-box;
+        }
+        .form-group input[type="number"] {
+            width: 50px;
+        }
+        .form-group input[type="submit"] {
+            background-color: orange;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: darkorange;
+        }
+        .limits {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="myForm">
+            <div class="form-group">
+                <label for="file">File Name</label>
+                <input type="file" id="file" name="file">
+            </div>
+            <div class="form-group limits">
+                <div>
+                    <label for="lower-limit">Lower Limit</label>
+                    <input type="number" id="lower-limit" name="lower-limit" value="490">
+                </div>
+                <div>
+                    <label for="upper-limit">Upper Limit</label>
+                    <input type="number" id="upper-limit" name="upper-limit" value="510">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Id</label>
+                <input type="email" id="email" name="email" value="ratchitab21@gmail.com">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    
+    <div id="output" class="container" style="display:none;">
+        <h3>Form Output</h3>
+        <p><strong>File Name:</strong> <span id="output-file"></span></p>
+        <p><strong>Lower Limit:</strong> <span id="output-lower-limit"></span></p>
+        <p><strong>Upper Limit:</strong> <span id="output-upper-limit"></span></p>
+        <p><strong>Email Id:</strong> <span id="output-email"></span></p>
+    </div>
+
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const fileName = document.getElementById('file').value.split('\\').pop();
+            const lowerLimit = document.getElementById('lower-limit').value;
+            const upperLimit = document.getElementById('upper-limit').value;
+            const email = document.getElementById('email').value;
+
+            document.getElementById('output-file').textContent = fileName;
+            document.getElementById('output-lower-limit').textContent = lowerLimit;
+            document.getElementById('output-upper-limit').textContent = upperLimit;
+            document.getElementById('output-email').textContent = email;
+
+            document.getElementById('myForm').style.display = 'none';
+            document.getElementById('output').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
